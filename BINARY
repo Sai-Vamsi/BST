@@ -29,11 +29,26 @@ struct node* insert(struct node* node, int key)
         node->right = insert(node->right, key);    
   
     return node; 
+  }
+  void printPostorder(struct Node* node) 
+{ 
+    if (node == NULL) 
+        return; 
+    printPostorder(node->left);
+    printPostorder(node->right);
+    cout << node->data << " "; 
+} 
+  
     int main() 
 {   struct node *root = NULL; 
     root = insert(root, 50); 
     insert(root, 30); 
     insert(root, 20); 
+    insert(root, 40); 
+    insert(root, 70); 
+    insert(root, 60); 
+    insert(root, 80); 
+    printPostorder(root);
+   
     return 0; 
-} 
 } 
