@@ -38,6 +38,25 @@ struct node* insert(struct node* node, int key)
   
     /* return the (unchanged) node pointer */
     return node; 
+  }
+  void insertafter(int v,int va)
+{
+ struct node *newnode,*temp,*preptr;
+ newnode=(struct node*)malloc(sizeof(struct node));
+ newnode->data=va;
+ temp=head;
+ preptr=temp;
+  while(temp->data!=v)
+  {
+   preptr=temp;
+   temp=temp->next;
+  }
+  preptr=preptr->next;
+  temp=temp->next;
+  preptr->next=newnode;
+  //temp->next=newnode;
+  newnode->next=temp;
+}
     int main() 
 { 
     
@@ -49,10 +68,11 @@ struct node* insert(struct node* node, int key)
     insert(root, 70); 
     insert(root, 60); 
     insert(root, 80); 
-   
+    int v,va;
     // print inoder traversal of the BST 
+    cin>>v>>va;
+   insertafter(v,va);
     inorder(root); 
    
     return 0; 
-} 
 } 
