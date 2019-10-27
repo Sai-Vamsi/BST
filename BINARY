@@ -7,7 +7,7 @@ struct node
     struct node *left, *right; 
 }; 
    
-// A utility function to create a new BST node 
+
 struct node *newNode(int item) 
 { 
     struct node *temp =  (struct node *)malloc(sizeof(struct node)); 
@@ -16,51 +16,31 @@ struct node *newNode(int item)
     return temp; 
 } 
    
-void inorder(struct node *root) 
-{ 
-    if (root != NULL) 
-    { 
-        inorder(root->left); 
-        printf("%d \n", root->key); 
-        inorder(root->right); 
-    } 
-}
+
 struct node* insert(struct node* node, int key) 
 { 
-    /* If the tree is empty, return a new node */
+    
     if (node == NULL) return newNode(key); 
   
-    /* Otherwise, recur down the tree */
+    
     if (key < node->key) 
         node->left  = insert(node->left, key); 
     else if (key > node->key) 
         node->right = insert(node->right, key);    
   
-    /* return the (unchanged) node pointer */
     return node; 
   }
-  void insertafter(int v,int va)
-{
- struct node *newnode,*temp,*preptr;
- newnode=(struct node*)malloc(sizeof(struct node));
- newnode->data=va;
- temp=head;
- preptr=temp;
-  while(temp->data!=v)
-  {
-   preptr=temp;
-   temp=temp->next;
-  }
-  preptr=preptr->next;
-  temp=temp->next;
-  preptr->next=newnode;
-  //temp->next=newnode;
-  newnode->next=temp;
-}
-    int main() 
+  void printPostorder(struct Node* node) 
 { 
-    
-    struct node *root = NULL; 
+    if (node == NULL) 
+        return; 
+    printPostorder(node->left);
+    printPostorder(node->right);
+    cout << node->data << " "; 
+} 
+  
+    int main() 
+{   struct node *root = NULL; 
     root = insert(root, 50); 
     insert(root, 30); 
     insert(root, 20); 
@@ -68,11 +48,7 @@ struct node* insert(struct node* node, int key)
     insert(root, 70); 
     insert(root, 60); 
     insert(root, 80); 
-    int v,va;
-    // print inoder traversal of the BST 
-    cin>>v>>va;
-   insertafter(v,va);
-    inorder(root); 
+    printPostorder(root);
    
     return 0; 
 } 
